@@ -115,15 +115,15 @@ BMWConnectedAccessory.prototype._setOn = function(on, callback) {
  // horn                RHB
  // flash lights        RLF
 
- if (this.type = "climate") {
+ if (this.type == "climate") {
    bmwState = "RCN";
    jsonRequest = '{"rcnAction":"START"}'
 
- } else if (this.type = "horn") {
+ } else if (this.type == "horn") {
    bmwState = "RHB";
    jsonRequest = '{"number":2, "pause":1,"duration":1}'
 
- } else if (this.type = "lights") {
+ } else if (this.type == "lights") {
    bmwState = "RLF";
    jsonRequest = '{"number":2, "pause":1,"duration":1}'
  }
