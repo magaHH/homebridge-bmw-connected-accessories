@@ -1,22 +1,25 @@
 {
   "name": "homebride-bmw-connected-accessories",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "author": {
    "name": "magaHH",
-   "email": "xx@gmx.de",
+   "email": "35167489+magaHH@users.noreply.github.com",
    "url": "https://github.com/magaHH"
  },
   "scripts": {
     "start": "node index.js"
   },
-  "description": "A Homebridge plugin to control BMW Connected Drive Cars",
+  "description": "A Homebridge plugin to control BMW Connected Drive Cars Accessories",
   "license": "MIT",
-  "homepage": "xxx",
+  "homepage": "https://github.com/magaHH/homebridge-bmw-connected-accessories",
   "keywords": [
     "homebridge-plugin",
     "homebridge-lock",
     "homebridge",
     "lock",
+    "climate",
+    "horn",
+    "light flash",
     "bmw"
   ],
   "main": "index.js",
