@@ -34,11 +34,11 @@ function BMWConnectedAccessory(log, config) {
   //this.stateful = config.stateful;
   //this.reverse = config.reverse;
   // this.time = config.time ? config.time : 1000;
-  this.time = 1000;
+  this.time = 5000;
   this._service = new Service.Switch(this.name);
 
   this._service.getCharacteristic(Characteristic.On)
-    .on('set', this._setOn.bind(this));
+    .on('set', this._setState.bind(this));
 
 
 }
@@ -73,9 +73,9 @@ BMWConnectedAccessory.prototype.getExecution = function(callback) {
 
     // this callback will only be called when the request succeeded or after maxAttempts or on error
 
-    this.log('Error: ', err);
-    this.log('Response: ', response);
-    this.log('statusCode: ', response.statusCode);
+    //this.log('Error: ', err);
+    //this.log('Response: ', response);
+    //this.log('statusCode: ', response.statusCode);
 
     if (!err && response.statusCode == 200) {
       this.log('Success!');
@@ -94,7 +94,7 @@ function myRetryStrategy(err, response, body){
   // retry the request if we had an error or if the response was a 'Bad Gateway'
   var json = "";
   var json = JSON.parse(body);
-  console.log('This is the Retry-json: ', json);
+  //console.log('This is the Retry-json: ', json);
 
   // var commandtype = (json["remoteServiceType"]);
   var execution = "";
@@ -103,7 +103,23 @@ function myRetryStrategy(err, response, body){
   return err || execution === "PENDING" || execution === "RUNNING"
 }
 
-BMWConnectedAccessory.prototype._setOn = function(on, callback) {
+BMWConnectedAccessory.prototype._setState = function(on, callback) {
+
+//on: off = false/0, on=true/1
+  var targetState = on;
+  console.log('Switch was switched (_setState called) to: ',targetState);
+
+  //if switched off
+  if (targetState == 0){
+  //this._service.setCharacteristic(Characteristic.On, false);
+console.log('switching it off');
+callback(null, targetState); // success
+
+}
+  //if switched on
+else {
+
+
 
 
   var bmwState = "";
@@ -144,7 +160,7 @@ BMWConnectedAccessory.prototype._setOn = function(on, callback) {
     console.log('current authtoken', this.authToken)
 
     var setStateUrl = 'https://www.bmw-connecteddrive.co.uk/remoteservices/rsapi/v1/' + this.vin + '/' + bmwState;
-    console.log('StateURL', setStateUrl);
+  //  console.log('StateURL', setStateUrl);
 
   request.post({
       url: setStateUrl,
@@ -159,7 +175,7 @@ BMWConnectedAccessory.prototype._setOn = function(on, callback) {
   }, function(err, response, body) {
 
     if (!err && response.statusCode == 200) {
-      this.log('Remote: ' + bmwState);
+      //this.log('Remote: ' + bmwState);
 
       // call this.getExecution
       this.getExecution(function(err){
@@ -167,11 +183,20 @@ BMWConnectedAccessory.prototype._setOn = function(on, callback) {
           callback(err,this.currentState);
         }
 
+        //set the switch to on and after 1 sec back to off
+      console.log('switching it on');
+      //console.log('would have switched it on');
+      //this._service.setCharacteristic(Characteristic.On, true);
+
       setTimeout(function() {
-          this._service.setCharacteristic(Characteristic.On, true);
+          console.log('switching it off after ',this.time,'ms');
+          this._service.setCharacteristic(Characteristic.On, false);
+          //console.log('would have switched it off');
+
         }.bind(this), this.time);
 
-      callback(null); // success
+
+      callback(null, targetState); // success
     }.bind(this));
     }
     else {
@@ -180,6 +205,8 @@ BMWConnectedAccessory.prototype._setOn = function(on, callback) {
     }
   }.bind(this));
 }.bind(this));
+
+} // end of if for "set to on"
 
 }
 
