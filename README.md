@@ -6,7 +6,9 @@ You add multiple sections to the config.json if you want to use multiple functio
 
 as type "lights" | "horn" | "climate" | "lock" | "unlock" can used.
 
+# config.json
 
+```
 {
     "accessory": "BMW-Connected-Accessories",
     "type": "lights",
@@ -25,5 +27,6 @@ as type "lights" | "horn" | "climate" | "lock" | "unlock" can used.
     "password": "password",
     "client_id": "dbf0a542-xxxx-xxxx-xxxx-55172fbfce35"
 }
+```
 
 The plugin can be installed via config-ui-x or via "sudo npm install -g --unsafe-perm homebridge-bmw-connected-accessories"
