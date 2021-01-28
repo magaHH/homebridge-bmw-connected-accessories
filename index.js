@@ -143,6 +143,14 @@ else {
    bmwState = "RLF";
    jsonRequest = '{"number":2, "pause":1,"duration":1}'
  }
+ else if (this.type == "lock") {
+   bmwState = "RDL";
+   jsonRequest = ''
+ }
+ else if (this.type == "unlock") {
+   bmwState = "RDU";
+   jsonRequest = '';
+ }
 
  else {
    //callback( new Error('ERROR Type not correct, Please check config'));

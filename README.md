@@ -1,10 +1,10 @@
-U
+This Plugin can provide switches to remotely trigger flashing lights, horn, start climate, lock or unlock.
 
-download the repo to /usr/local/lib/node_modules/
-goto to the directory "cd /usr/local/lib/node_modules/"
-install the plugin with "sudo npm i ./homebridge-bmw-connected-accessories/"
+This plugin can NOT read the actual status of the functions or if the trigger was execute by BMW successfully. Thus the switch will be set to off after 5 seconds automatically.
 
-add the a accessory to the config.json
+You add multiple sections to the config.json if you want to use multiple functions
+
+as type "lights" | "horn" | "climate" | "lock" | "unlock" can used.
 
 
 {
@@ -15,7 +15,15 @@ add the a accessory to the config.json
     "username": "a@b.com",
     "password": "password",
     "client_id": "dbf0a542-xxxx-xxxx-xxxx-55172fbfce35"
+},
+{
+    "accessory": "BMW-Connected-Accessories",
+    "type": "climate",
+    "name": "BMW Standheizung",
+    "vin": "WBAJN51060xxxxxxx",
+    "username": "a@b.com",
+    "password": "password",
+    "client_id": "dbf0a542-xxxx-xxxx-xxxx-55172fbfce35"
 }
 
-
-###########################################
+The plugin can be installed via config-ui-x or via "sudo npm install -g --unsafe-perm homebridge-bmw-connected-accessories"
