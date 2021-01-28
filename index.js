@@ -145,11 +145,11 @@ else {
  }
  else if (this.type == "lock") {
    bmwState = "RDL";
-   jsonRequest = ''
+   jsonRequest = '{}'
  }
  else if (this.type == "unlock") {
    bmwState = "RDU";
-   jsonRequest = '';
+   jsonRequest = '{}';
  }
 
  else {
