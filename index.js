@@ -58,7 +58,7 @@ BMWConnectedAccessory.prototype.getExecution = function(callback) {
   var complete = 0;
 
   requestretry.get({
-    url: 'https://www.bmw-connecteddrive.co.uk/remoteservices/rsapi/v1/' + this.vin + '/state/execution',
+    url: 'https://www.bmw-connecteddrive.com/remoteservices/rsapi/v1/' + this.vin + '/state/execution',
     headers: {
       'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_1_1 like Mac OS X) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0 Mobile/15B150 Safari/604.1',
       'Authorization': 'Bearer ' + this.authToken,
@@ -167,7 +167,7 @@ else {
 
     console.log('current authtoken', this.authToken)
 
-    var setStateUrl = 'https://www.bmw-connecteddrive.co.uk/remoteservices/rsapi/v1/' + this.vin + '/' + bmwState;
+    var setStateUrl = 'https://www.bmw-connecteddrive.com/remoteservices/rsapi/v1/' + this.vin + '/' + bmwState;
   //  console.log('StateURL', setStateUrl);
 
   request.post({
